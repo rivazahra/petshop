@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+*{
+  font-family: "Montserrat", sans-serif;
+}
+
+.pet-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  display: block;
+  animation: bounce 2s infinite;
+}
