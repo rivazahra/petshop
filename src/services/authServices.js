@@ -17,7 +17,7 @@ const MOCK_USERS = [
 
 const MOCK_TOKEN = "mock-jwt-token-12345"
 
-export const AuthService ={
+export const authService ={
     async login (email, password){
         await new Promise (resolve => setTimeout(resolve,1000))
         const user = MOCK_USERS.find(u=>u.email === email && u.password === password);

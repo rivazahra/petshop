@@ -1,15 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import Login from './components/login/Login'
+import LoginForm from './components/login/LoginForm'
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Dashboard from './components/home/Dashboard'
+import { AuthProvider } from './context/AuthProvider'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-     <Login/>
+      <Router>
+        <AuthProvider>
+          <Routes>
+            <Route path="/login" element={<LoginForm />} />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/" element={<Navigate to="/dashboard" />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
     </>
   )
 }
