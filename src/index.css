@@ -1,6 +1,6 @@
 @import 'tailwindcss';
-*{
-  font-family: "Montserrat", sans-serif;
+* {
+  font-family: 'Montserrat', sans-serif;
 }
 
 .pet-icon {
@@ -8,4 +8,64 @@
   margin-bottom: 20px;
   display: block;
   animation: bounce 2s infinite;
+}
+nav link:hover,
+nav link.active {
+  background: rgba(255, 255, 255, 0.1);
+  border-left-color: #fff;
+  color: #fff;
+}
+.form-control {
+  width: 95%;
+  padding: 10px 15px;
+  border: 2px solid #e0e6ed;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+.form-control:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group label {
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.add-patient h1{
+  color:#2C3E50;
+}
+
+ .information {
+  background-color: white;  
+  /* margin-top: 20px; */
+  padding: 25px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 
+              0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+.information label{
+  font-weight: 500;
+}
+
+.control-area{
+    width: 100%;
+  padding: 20px 15px;
+  border: 2px solid #e0e6ed;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.information button{
+  padding:10px;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  color: white;
+  background-color: #2B7FFF;
 }
