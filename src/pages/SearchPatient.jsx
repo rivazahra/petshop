@@ -13,7 +13,7 @@ const SearchPatient = () => {
     let filtered = pasien
 
     if (selectedJenis && selectedJenis !== 'all'){
-      pasien.filter(patient => patient.jenis === selectedJenis)
+     return pasien.filter(patient => patient.jenis === selectedJenis)
     }
 
     if(searchValue.trim()){
