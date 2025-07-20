@@ -1,16 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { IoSearchOutline } from 'react-icons/io5'
 import CardSearchPatient from '../components/CardSearchPatient'
 
 const SearchPatient = () => {
   const [pasien, setPasien] = useState([])
-  const [filterValue, setFilterValue] = useState('')
-  
-  
-  const handleFilter = (e) => {
-    setFilterValue(e.target.value)
-  }
-  const filteredClick = pasien.filter((p) => filterValue === '' || p.jenis === filterValue)
+
+  const [searchValue, setsearchValue] = useState('')
+  const [selectedJenis,setSelectedJenis] = useState('all')
+
+
+  const filteredPatients = useMemo(() => {
+    let filtered = pasien
+
+    if (selectedJenis && selectedJenis !== 'all'){
+      pasien.filter(patient => patient.jenis === selectedJenis)
+    }
+
+    if(searchValue.trim()){
+      const searchLower = searchValue.toLowerCase().trim()
+      filtered = filtered.filter(patient => patient.name?.toLowerCase().includes(searchLower) || patient.namaPemilik?.toLowerCase().includes(searchLower)) 
+    }
+    return filtered
+  }, [pasien, selectedJenis,searchValue])
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem('dataHewan')) || []
@@ -29,19 +40,17 @@ const SearchPatient = () => {
             <i>
               <IoSearchOutline />
             </i>
-            <input type="text" className="input-search" placeholder="Cari berdasarkan nama hewan, atau nama pemilik" />
+            <input type="text" value={searchValue} name="search" onChange={(e)=>setsearchValue(e.target.value)} className="input-search" placeholder="Cari berdasarkan nama hewan, atau nama pemilik" />
           </div>
           <div className="space-x-5">
-            <select name="" id="" className="jenis-option" onChange={handleFilter}>
-              <option value="">Semua jenis</option>
+            <select name="" id="" className="jenis-option" onChange={(e)=>setSelectedJenis(e.target.value)}>
+              <option value="all">Semua jenis</option>
               <option value="kucing">Kucing</option>
               <option value="anjing">Anjing</option>
             </select>
           </div>
-          {filteredClick.map((pasien)=>(
-            
+          {filteredPatients.map((pasien) => (
             <CardSearchPatient key={pasien.id} pasienData={pasien} />
-
           ))}
         </div>
         <div className="information"></div>

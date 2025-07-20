@@ -9,7 +9,7 @@ const CardSearchPatient = ({ pasienData }) => {
               {pasienData.name} - {pasienData.ras}
             </h1>
             <p className="text-sm text-gray-500">
-              Pemilik: {pasienData.pemilik} | Telepon: {pasienData.noTelp}{' '}
+              Pemilik: {pasienData.namaPemilik} | Telepon: {pasienData.noTelp}{' '}
             </p>
             <p className="text-sm text-gray-500">
               Umur: {pasienData.umur} tahun | Berat: {pasienData.berat} kg | Terakhir diperiksa: 15 Juli 2025
