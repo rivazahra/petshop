@@ -6,22 +6,21 @@ const SearchPatient = () => {
   const [pasien, setPasien] = useState([])
 
   const [searchValue, setsearchValue] = useState('')
-  const [selectedJenis,setSelectedJenis] = useState('all')
-
+  const [selectedJenis, setSelectedJenis] = useState('all')
 
   const filteredPatients = useMemo(() => {
     let filtered = pasien
 
-    if (selectedJenis && selectedJenis !== 'all'){
-     return pasien.filter(patient => patient.jenis === selectedJenis)
+    if (selectedJenis && selectedJenis !== 'all') {
+      return pasien.filter((patient) => patient.jenis === selectedJenis)
     }
 
-    if(searchValue.trim()){
+    if (searchValue.trim()) {
       const searchLower = searchValue.toLowerCase().trim()
-      filtered = filtered.filter(patient => patient.name?.toLowerCase().includes(searchLower) || patient.namaPemilik?.toLowerCase().includes(searchLower)) 
+      filtered = filtered.filter((patient) => patient.name?.toLowerCase().includes(searchLower) || patient.namaPemilik?.toLowerCase().includes(searchLower))
     }
     return filtered
-  }, [pasien, selectedJenis,searchValue])
+  }, [pasien, selectedJenis, searchValue])
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem('dataHewan')) || []
@@ -40,10 +39,10 @@ const SearchPatient = () => {
             <i>
               <IoSearchOutline />
             </i>
-            <input type="text" value={searchValue} name="search" onChange={(e)=>setsearchValue(e.target.value)} className="input-search" placeholder="Cari berdasarkan nama hewan, atau nama pemilik" />
+            <input type="text" value={searchValue} name="search" onChange={(e) => setsearchValue(e.target.value)} className="input-search" placeholder="Cari berdasarkan nama hewan, atau nama pemilik" />
           </div>
           <div className="space-x-5">
-            <select name="" id="" className="jenis-option" onChange={(e)=>setSelectedJenis(e.target.value)}>
+            <select name="" id="" className="jenis-option" onChange={(e) => setSelectedJenis(e.target.value)}>
               <option value="all">Semua jenis</option>
               <option value="kucing">Kucing</option>
               <option value="anjing">Anjing</option>
