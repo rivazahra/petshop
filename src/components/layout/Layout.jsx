@@ -6,9 +6,9 @@ import ProtectedRoute from '../ProtectedRoute'
 const Layout = () => {
   return (
     <ProtectedRoute>
-      <div className="flex bg-[#F5F7FA]">
+      <div className="flex bg-[#F5F7FA] ">
         <Sidebar />
-        <main className="flex-1 p-6  min-h-screen  overflow-y-auto">
+        <main className="flex-1 container  min-h-screen  overflow-y-auto">
           <Outlet />
 
         </main>
