@@ -1,12 +1,43 @@
-# React + Vite
+# 🐾 Petshop Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive web application for managing pet store operations built with modern web technologies.
 
-Currently, two official plugins are available:
+## 🚀 Demo Access
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Live Demo:** [https://petshop-kappa-khaki.vercel.app](https://your-domain.com)
 
-## Expanding the ESLint configuration
+### Demo Credentials
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Email:** `admin@example.com`
+- **Password:** `admin123`
+
+## ✨ Features
+
+- 🐕 **Pet Management** - Complete pet records and health tracking
+- 📊 **Analytics Dashboard** - Business insights and reporting
+- 📱 **Responsive Design** - Works on all devices
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React.js, Tailwind CSS, React Router
+- **State Management:** Context API
+
+## 📱 Screenshots
+
+![1753678749412](images/README/1753678749412.png)
+
+## 🔧 Installation
+
+```bash
+# Clone repository
+git clone https://github.com/yourusername/petshop-management
+
+# Install dependencies
+npm install
+
+# Setup environment
+cp .env.example .env
+
+# Run development server
+npm run dev
+```
