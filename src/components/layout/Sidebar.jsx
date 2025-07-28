@@ -1,50 +1,35 @@
 import { Link } from "react-router-dom";
 import { FaCat } from "react-icons/fa";
-import { MdArrowForwardIos, MdDashboard 
+import {
+  MdArrowForwardIos, MdDashboard
 
 } from "react-icons/md";
-import { IoIosAdd } from "react-icons/io";
+import { IoIosAdd, IoIosAddCircleOutline } from "react-icons/io";
 import { LuNotebookPen } from "react-icons/lu";
-import { IoSearch } from "react-icons/io5";
-import { useState } from "react";
-
-export default function Sidebar() {
-  const [barOpen, setBarOpen] = useState(false)
-
-  
-  const handleClick = () =>{
-    setBarOpen(!barOpen)
-  }
+import { IoAddCircle, IoSearch } from "react-icons/io5";
+export default function Sidebar({ collapsed, onToogle }) {
   return (
     <>
-      {barOpen && (
-      <div 
-        className="fixed inset-0  bg-opacity-50 z-40 md:hidden"
-        onClick={() => setBarOpen(false)}
-      />
-    )}
-    <div className={`sidebar ${barOpen ? 'left-0' : 'md:left-0 max-md:left-[-calc(100%-3rem)]'} w-[20%] bg-[#2c3e50]  h-screen transition-all duration-300 fixed top-0 flex flex-col pl-8 pt-10 text-white`}>
-      <span 
-      onClick={handleClick}
-      className="bg-gray-400 self-center cursor-pointer rounded-full p-2 w-10 mt-4 md:hidden z-10"
-    >
-      <MdArrowForwardIos className={`transition-transform duration-300 ${barOpen ? 'rotate-180' : ''}`} />
-    </span>
-      <div className="flex gap-4 mb-14 items-center">
-        <FaCat className="text-3xl" />
-        <div className="font-bold text-3xl">Pet Care</div>
-      </div>
+      <div className={`left-0 top-0  overflow-hidden z-50 bg-[#2c3e50] ${collapsed ? 'w-17' : 'w-72'}  h-screen transition-all duration-300 ease-in-out  fixed top-0 flex flex-col pl-8 pt-10 text-white`}>
 
-      <nav className="flex flex-col gap-10 text-lg font-medium">
-        <Link to="/dashboard" className="flex gap-3 active items-center hover:text-gray-200">
-          <MdDashboard />
-          Dashboard
-        </Link>
+        <button className="toggle-btn" onClick={onToogle}>
+          <MdArrowForwardIos className={`arrow left-2 `} color="black" />
+        </button>
+        <div className="flex gap-4 mb-14 items-center">
+          <FaCat className="w-8 h-8  rounded-lg flex items-center justify-center text-xl flex-shrink-0 z-10" />
+          <div className={`font-bold text-3xl transition-opacity duration-300 ${collapsed ? 'opacity-0' : 'opacity-100'}`} >Pet Care</div>
+        </div>
 
-        <Link to="/add-patient" className="flex gap-3 items-center hover:text-gray-200">
-          <IoIosAdd className="text-2xl" />
-          Tambah Pasien
-        </Link>
+        <nav className={`flex flex-col gap-10 text-xl font-medium space-y-3 transition-opacity duration-300 ${collapsed ? 'opacity-0' : 'opacity-100'}`}>
+          <Link to="/dashboard" className="flex gap-3 active items-center hover:text-gray-200">
+            <MdDashboard />
+            Dashboard
+          </Link>
+
+          <Link to="/add-patient" className="flex gap-3 items-center hover:text-gray-200">
+            <IoIosAddCircleOutline className="" />
+            Tambah Pasien
+          </Link>
 
         <Link to="/search-patient" className="flex gap-3 items-center hover:text-gray-200">
           <IoSearch size={20} />
