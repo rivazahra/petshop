@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 * {
   font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
 }
-
 
 /* tablet portrait & landscape */
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -10,10 +10,11 @@
     flex-direction: row;
     padding: 2%;
     margin-top: 1%;
-    margin-left: 260px; /* Sesuaikan dengan sidebar width + padding */
+    /* margin-left: 260px; Sesuaikan dengan sidebar width + padding */
   }
-  
+
   .sidebar {
+    /* z-index: 1000; */
     width: 250px;
     min-width: 250px;
   }
@@ -28,12 +29,14 @@
   .container {
     flex-direction: row;
     padding: 2%;
+    /* margin-left: 10%; */
     margin-top: 1%;
-    margin-left: 18%; /* Percentage works better on larger screens */
+    /* margin-left: 18%; Percentage works better on larger screens */
   }
-  
+
   .sidebar {
     width: 250px;
+    transition: all 0.3s ease;
     min-width: 250px;
   }
   
@@ -43,18 +46,8 @@
 }
 
 @media (max-width: 767px) {
-  
-  .container{
-    /* font-size: 1em; */
-    margin: 2%;
-  }
-  .sidebar {
-    left: -20%; 
-    /* Sesuaikan dengan width sidebar */
-  }
+ 
 }
-
-
 
 .pet-icon {
   font-size: 4rem;
@@ -63,10 +56,12 @@
   animation: bounce 2s infinite;
 }
 nav link:hover,
-nav link.active {
+nav  .active {
   background: rgba(255, 255, 255, 0.1);
   border-left-color: #fff;
   color: #fff;
+  border-radius: 8px;
+  padding: 5px;
 }
 .form-control {
   width: 100%;
@@ -185,4 +180,38 @@ nav link.active {
   border-radius: 0.5rem;
   color: rgb(181, 181, 181);
   background-color: #f2f2f2;
+}
+
+.toggle-btn {
+  position: absolute;
+  right: -15px;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  width: 30px;
+  height: 30px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 6px solid #667eea;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  transition: transform 0.3s ease;
+}
+
+main {
+  /* margin-left: 280px; */
+  padding: 40px;
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
 }

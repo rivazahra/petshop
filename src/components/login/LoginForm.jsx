@@ -49,7 +49,7 @@ const LoginForm = () => {
           <span className="pet-icon">🐱🐶</span>
           <h1 className="text-2xl font-bold text-blue-600">Welcome back Admin!</h1>
         </div>
-        <form action="" onSubmit={handleSubmit} className="space-y-6">
+        <form id='login-form' action="" onSubmit={handleSubmit} className="space-y-6">
           <div className="my-4">
             <label className="block text-sm font-medium mb-2">Email</label>
             <input type="email" name="email" value={formData.email} placeholder="Input your email" onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
