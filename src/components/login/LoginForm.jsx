@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthProvider'
+import Input from '../Input'
+import { login } from '../../utils/authService'
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: 'rivazahra23@gmail.com',
+    password: 'admin123',
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const { login } = useAuth()
+  // const { login } = useAuth()
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -23,15 +24,12 @@ const LoginForm = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     if (!formData.email || !formData.password) {
       setError('Please fill in all fields')
       return
     }
-
     setLoading(true)
     setError('')
-
     try {
       await login(formData.email, formData.password)
       navigate('/dashboard')
@@ -43,31 +41,31 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="min-h-screen flex justify-center items-center p-5 m-auto my-auto">
-      <div className="bg-blue-100 w-1/2 max-w-md p-8 rounded-lg shadow-lg items-center">
+    <div className="min-h-screen gap-5 color-[#2c3e50] w-full flex flex-col justify-center items-center  ">
+      <div className="w-full  max-w-md min-w-[24rem] bg-white rounded-lg shadow-md p-6 md:p-10">
         <div className="text-center">
           <span className="pet-icon">🐱🐶</span>
-          <h1 className="text-2xl font-bold text-blue-600">Welcome back Admin!</h1>
+          <h1 className="text-2xl font-bold text-[#2c3e50]">Welcome back Admin!</h1>
         </div>
-        <form id='login-form' action="" onSubmit={handleSubmit} className="space-y-6">
-          <div className="my-4">
-            <label className="block text-sm font-medium mb-2">Email</label>
-            <input type="email" name="email" value={formData.email} placeholder="Input your email" onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <form id='login-form' onSubmit={handleSubmit} className="space-y-6">
+          <div className="my-4 w-full space-y-5">
+            <Input onChange={handleChange} id={'email'} label={'Email'} type='email'
+              defaultValue='rivazahra23@gmail.com' placeholder='rivazahra23@gmail.com' required />
+            <Input onChange={handleChange} id={'password'} label={'Password'} type='password'
+              defaultValue="admin123" placeholder='admin123' required />
           </div>
-          <div className="mb-6">
-            <label className="block text-sm font-medium mb-2">Password</label>
-            <input
-              type="password"
-              value={formData.password}
-              name="password"
-              placeholder="Input your password"
-              onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <button className="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 transition-colors" disabled={loading}>
+
+          <button type='submit'
+            className="font-semibold w-full cursor-pointer bg-[#4e6b88] text-white py-3 rounded-md hover:bg-[#2c3e50] transition-colors"
+            disabled={loading}>
             {loading ? 'Logging in....' : 'Login'}
           </button>
+          {error && (
+            <div className='text-red-700 font-semibold'>
+          | {error}
+          </div>
+          )}
+
         </form>
       </div>
     </div>

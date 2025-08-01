@@ -13,7 +13,6 @@ function App() {
   return (
     <>
       <Router>
-        <AuthProvider>
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/" element={<Layout />}>
@@ -24,7 +23,6 @@ function App() {
               <Route path="/medical-records" element={<MedicalRecords />} />
                </Route>
             </Routes>
-        </AuthProvider>
       </Router>
     </>
   )

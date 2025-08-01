@@ -1,20 +1,20 @@
 import React from 'react'
-import { useAuth } from '../context/AuthProvider'
+// import { useAuth } from '../context/AuthProvider'
 import { Navigate } from 'react-router-dom'
 
 const ProtectedRoute = ({children}) => {
-  const {isAuthenticated, loading} = useAuth()
+  // const {isAuthenticated, loading} = useAuth()
   
-  if(loading){
-    return (
-       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
-    )
-  }
+  // if(loading){
+  //   return (
+  //      <div className="min-h-screen flex items-center justify-center">
+  //       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+  //     </div>
+  //   )
+  // }
   
-  // ✅ Return statement harus di dalam function
-  return isAuthenticated ? children : <Navigate to="/login" />
+  // // ✅ Return statement harus di dalam function
+  // return isAuthenticated ? children : <Navigate to="/login" />
 }
 
 export default ProtectedRoute
