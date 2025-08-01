@@ -3,7 +3,7 @@ import { IoSearchOutline } from 'react-icons/io5'
 import CardMedicalRecords from '../components/CardMedicalRecords'
 
 const MedicalRecords = () => {
-  const pasien = JSON.parse(localStorage.getItem('dataHewan'))
+  const pasien = JSON.parse(localStorage.getItem('dataHewan')) || [{}]
   const rekamMedis = JSON.parse(localStorage.getItem('rekamMedis'))
 
   const [searchValue, setsearchValue] = useState('')
