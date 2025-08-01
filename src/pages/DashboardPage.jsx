@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 
 const DashboardPage = () => {
-    const [total,setTotal] = useState(0);
+  const pasien = JSON.parse(localStorage.getItem('dataHewan')) || [{}]
+    const [total,setTotal] = useState(pasien);
     const [todayPatient,setTodayPatient] = useState(0);
     const [records,setRecords] = useState(0);
   return (
     <div className=" flex flex-col gap-20 ">
-      <div className="bg-white p-5 shadow-gray-300  shadow-lg rounded-md font-bold">
-        <h1>Dashboard</h1>
-        <p>Welcome Admin!</p>
+      <div className="p-5 space-y-4   shadow-lg rounded-md ">
+        <h1 className='font-bold text-3xl'>Welcome back, Admin!</h1>
+        <p>Here's what's happening at your clinic today</p>
       </div>
-      <div className="grid grid-cols-2 gap-3 ">
+      <div className="grid grid-cols-4 gap-3 ">
         <div className="total-patient p-4 bg-white shadow-lg shadow-gray-300">
-          <h1 className="font-bold">Total Patient</h1>
-          <h3>{total}</h3>
+          <h1 className="font-bold">Today Appoinments</h1>
+          <h3 className='text-3xl'>12</h3>
+          <p className=''>+3 from yesterday</p>
         </div>
         <div className="patient-today p-4 bg-white shadow-lg shadow-gray-300 ">
           <h1 className="font-bold">Patient today</h1>
