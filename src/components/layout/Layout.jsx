@@ -9,7 +9,6 @@ const Layout = () => {
     setIsCollapsed(!collapsed)
   }
   return (
-    <ProtectedRoute>
       <div className="flex bg-[#F5F7FA] ">
         <Sidebar collapsed={collapsed} setCollapse={setIsCollapsed} onToogle={
        handleClick
@@ -18,7 +17,6 @@ const Layout = () => {
           <Outlet />
         </main>
       </div>
-    </ProtectedRoute>
   )
 }
 
