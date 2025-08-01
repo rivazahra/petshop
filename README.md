@@ -4,11 +4,19 @@ A comprehensive web application for managing pet store operations built with mod
 
 ## 🚀 Demo Access
 
-<<<<<<< HEAD
+ HEAD
 **Live Demo:** [https://petshop-kappa-khaki.vercel.app](https://petshop-kappa-khaki.vercel.app)
-=======
+===============================================================================================
+
 **Live Demo:** [https://petshop-kappa-khaki.vercel.app]([https://your-domain.com](https://petshop-kappa-khaki.vercel.app))
+
 >>>>>>> 9a0391fb3fd8dd0b0c62779b39be50fb9e9959b9
+>>>>>>>
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
 
 ### Demo Credentials
 
