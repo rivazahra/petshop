@@ -8,12 +8,15 @@ import { IoIosAdd, IoIosAddCircleOutline } from "react-icons/io";
 import { LuNotebookPen } from "react-icons/lu";
 import { IoAddCircle, IoLogOut, IoSearch } from "react-icons/io5";
 import { useState } from "react";
-import { supabase } from "../../utils/supabase/client";
-import { createClient } from "@supabase/supabase-js";
+import { Logout } from "../../utils/authService";
 export default function Sidebar({ collapsed, onToogle, setCollapse }) {
   const [currentPath, setCurrentPath] = useState('/')
 
   const navigate = useNavigate()
+
+  const logout = ()=>{
+    Logout(navigate)
+  }
 
   const menuItems = [
     {
@@ -34,11 +37,7 @@ export default function Sidebar({ collapsed, onToogle, setCollapse }) {
     },
   ]
 
-  const handleLogOut = async () => {
-    await supabase.auth.signOut()
-    navigate('/login')
-
-  }
+ 
   return (
     <>
       <div className={`left-0 top-0 overflow-hidden z-50 bg-[#2c3e50] ${collapsed ? 'w-17' : 'w-72'} h-screen
@@ -76,7 +75,7 @@ export default function Sidebar({ collapsed, onToogle, setCollapse }) {
           )
           )}
 
-          <nav className="flex items-center py-3 px-3 cursor-pointer gap-2 text-white/80 hover:text-white mr-2 rounded-lg hover:bg-white/10" onClick={handleLogOut}>
+          <nav className="flex items-center py-3 px-3 cursor-pointer gap-2 text-white/80 hover:text-white mr-2 rounded-lg hover:bg-white/10" onClick={logout}>
             <IoLogOut size={25} />
             <span className="">Log out</span>
           </nav>

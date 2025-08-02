@@ -1,12 +1,16 @@
-import { supabase } from "./supabase/client"
+import { supabase } from './supabase/client'
 
-export const login = async (email,password)=>{
-    const {data,error}= await supabase.auth.signInWithPassword({email,password})
+export const login = async (email, password) => {
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
-    if(error) throw error;
-    return data;
+  if (error) throw error
+  return data
 }
 
-export const logout = async()=>{
-    await supabase.auth.signOut()
+export const Logout = async (navigate) => {
+  await supabase.auth.signOut()
+  localStorage.clear()
+  sessionStorage.clear()
+  navigate('/login')
+  
 }
