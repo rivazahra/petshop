@@ -1,18 +1,19 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { IoSearchOutline } from 'react-icons/io5'
 import CardSearchPatient from '../components/CardSearchPatient'
+import { getPatient } from '../utils/supabase/client'
 
 const SearchPatient = () => {
   const [pasien, setPasien] = useState([])
 
   const [searchValue, setsearchValue] = useState('')
   const [selectedJenis, setSelectedJenis] = useState('all')
-
+  
   const filteredPatients = useMemo(() => {
     let filtered = pasien
 
     if (selectedJenis && selectedJenis !== 'all') {
-      return pasien.filter((patient) => patient.jenis === selectedJenis)
+      return pasien.filter((patient) => patient.species === selectedJenis)
     }
 
     if (searchValue.trim()) {
@@ -21,12 +22,18 @@ const SearchPatient = () => {
     }
     return filtered
   }, [pasien, selectedJenis, searchValue])
-
-  useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem('dataHewan')) || []
-    setPasien(storedData)
+  
+  useEffect(()=> {
+    async function getHewan(){
+      const res = await getPatient()
+      console.log(res);
+      
+      setPasien(res)
+      return res
+    } 
+    getHewan()   
   }, [])
-
+  
   return (
     <div className="search-patient">
       <div className="flex flex-col gap-10">
@@ -51,6 +58,10 @@ const SearchPatient = () => {
           {filteredPatients.map((pasien) => (
             <CardSearchPatient key={pasien.id} pasienData={pasien} />
           ))}
+          {/* {filteredPatients && (
+            
+            <CardSearchPatient pasienData={pasien}/>
+          )} */}
         </div>
         <div className="information"></div>
       </div>
