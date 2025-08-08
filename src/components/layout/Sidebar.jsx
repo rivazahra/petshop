@@ -9,7 +9,8 @@ import { LuNotebookPen } from "react-icons/lu";
 import { IoAddCircle, IoLogOut, IoSearch } from "react-icons/io5";
 import { useState } from "react";
 import { Logout } from "../../utils/authService";
-export default function Sidebar({ collapsed, onToogle, setCollapse }) {
+import { Activity, BadgePlus, Heart } from "lucide-react";
+export default function Sidebar({ collapsed, onToogle }) {
   const [currentPath, setCurrentPath] = useState('/')
 
   const navigate = useNavigate()
@@ -21,11 +22,11 @@ export default function Sidebar({ collapsed, onToogle, setCollapse }) {
   const menuItems = [
     {
       id: 1, path: '/dashboard', icon:
-        <MdDashboard />, text: 'Dashboard'
+        <Activity />, text: 'Dashboard'
     },
     {
       id: 2, path: '/add-patient', icon:
-        <IoIosAddCircleOutline />, text: 'Tambah pasien'
+        <BadgePlus  size={20}/>, text: 'Tambah pasien'
     },
     {
       id: 3, path: '/search-patient', icon:
@@ -37,19 +38,20 @@ export default function Sidebar({ collapsed, onToogle, setCollapse }) {
     },
   ]
 
- 
+
   return (
     <>
-      <div className={`left-0 top-0 overflow-hidden z-50 bg-[#2c3e50] ${collapsed ? 'w-17' : 'w-72'} h-screen
-        transition-all duration-300 ease-in-out fixed top-0 flex flex-col pl-8 pt-10 text-white`}>
+      <div className={`left-0 top-0 overflow-hidden max-md:${collapsed}   text-gray-600 z-50   bg-white ${collapsed ? 'w-17' : 'w-72'} h-screen shadow-lg transition-all duration-200 ease-in-out fixed top-0 p-4 flex flex-col pt-10  `}>
 
-        <button className="toggle-btn" onClick={onToogle}>
-          <MdArrowForwardIos className={`arrow left-2 `} color="black" />
+        <button className="toggle-btn " onClick={onToogle}>
+          <MdArrowForwardIos className='' color="pink" />
         </button>
-        <div className="flex gap-4 mb-14 items-center">
-          <FaCat className="w-8 h-8  rounded-lg flex items-center justify-center text-xl flex-shrink-0 z-10" />
-          <div className={`font-bold text-3xl transition-opacity duration-300 ${collapsed ? 'opacity-0'
-            : 'opacity-100'}`}>VetCare</div>
+        <div className="flex p-3 mb-14 items-center">
+
+          <div className="flex items-center space-x-3">
+            <Heart className="w-8 h-8 text-pink-500" />
+            <h1 className="text-2xl font-bold text-gray-800">PetCare </h1>
+          </div>
         </div>
 
         <nav className={`flex flex-col gap-10 text-xl font-medium  space-y-3 transition-opacity duration-300 ml-2 ${collapsed
@@ -63,10 +65,10 @@ export default function Sidebar({ collapsed, onToogle, setCollapse }) {
               // setCollapse(true)
             }}
               className={({ isActive }) => `
-                flex items-center gap-3 py-3 px-3 rounded-lg transition-all duration-200 whitespace-nowrap group
+                flex items-center gap-3  p-4 rounded-lg transition-all duration-200 whitespace-nowrap group
                 ${isActive
-                  ? 'bg-white/10 mr-2 text-white shadow-sm'
-                  : 'text-white/80 hover:text-white mr-2 hover:bg-white/10'
+                  ? ' mr-4 bg-pink-50  text-pink-600  '
+                  : 'text-gray-600 mr-4 hover:bg-gray-100 hover:text-pink-600 transition-transform'
                 }
                 `}
             >
@@ -75,7 +77,7 @@ export default function Sidebar({ collapsed, onToogle, setCollapse }) {
           )
           )}
 
-          <nav className="flex items-center py-3 px-3 cursor-pointer gap-2 text-white/80 hover:text-white mr-2 rounded-lg hover:bg-white/10" onClick={logout}>
+          <nav className="flex items-center p-4 cursor-pointer gap-2  hover:bg-gray-100 mr-2 rounded-lg " onClick={logout}>
             <IoLogOut size={25} />
             <span className="">Log out</span>
           </nav>
