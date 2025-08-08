@@ -18,7 +18,7 @@ const SearchPatient = () => {
 
     if (searchValue.trim()) {
       const searchLower = searchValue.toLowerCase().trim()
-      filtered = filtered.filter((patient) => patient.name?.toLowerCase().includes(searchLower) || patient.namaPemilik?.toLowerCase().includes(searchLower))
+      filtered = filtered.filter((patient) => patient.name?.toLowerCase().includes(searchLower) || patient.owners?.name.toLowerCase().includes(searchLower))
     }
     return filtered
   }, [pasien, selectedJenis, searchValue])
@@ -34,6 +34,8 @@ const SearchPatient = () => {
     getHewan()   
   }, [])
   
+  
+
   return (
     <div className="search-patient">
       <div className="flex flex-col gap-10">
@@ -53,6 +55,8 @@ const SearchPatient = () => {
               <option value="all">Semua jenis</option>
               <option value="kucing">Kucing</option>
               <option value="anjing">Anjing</option>
+              <option value="ikan">Ikan</option>
+              <option value="kelinci">Kelinci</option>
             </select>
           </div>
           {filteredPatients.map((pasien) => (
