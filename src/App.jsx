@@ -11,6 +11,7 @@ import MedicalRecords from './pages/MedicalRecords'
 import { useEffect } from 'react'
 import {  supabase } from './utils/supabase/client'
 import { Logout } from './utils/authService'
+import DetailPatient from './pages/DetailPatient'
 
 function App() {
   const navigate = useNavigate()
@@ -47,6 +48,7 @@ function App() {
             <Route path="/add-patient" element={<AddPatient />} />
             <Route path="/search-patient" element={<SearchPatient />} />
             <Route path="/medical-records" element={<MedicalRecords />} />
+            <Route path="/detail-patient/:id" element={<DetailPatient />} />
           </Route>
         </Routes>
       </>
