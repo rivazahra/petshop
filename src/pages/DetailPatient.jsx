@@ -221,9 +221,9 @@ const DetailPatient = () => {
             <div className='information flex justify-between'>
                 <div className='space-y-2'>
                     <h1 className='font-bold text-3xl '>
-                        Detail Patient
+                        Detail Pasien
                     </h1>
-                    <p>Here’s a list of pet patient details</p>
+                    <p>Berikut informasi tentang pasien hewan.</p>
                 </div>
                 <div className='p-3'>
                     <button onClick={handleEdit}
@@ -334,7 +334,7 @@ const DetailPatient = () => {
                                     Owner Information
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <InputField label="Nama pemilik peliharaan" field="owners.name" icon={<User />}
+                                    <InputField label="Nama pemilik hewan" field="owners.name" icon={<User />}
                                         required formData={formData} setFormData={setFormData}
                                     />
                                     <InputField label="No. Telp" field="owners.phone" icon={<Phone />}
@@ -344,7 +344,7 @@ const DetailPatient = () => {
                                         setFormData={setFormData} type="email" icon={<Mail />}
                                     />
                                     <div className="md:col-span-2">
-                                        <InputField label="Address" field="owners.address" icon={<MapPin />}
+                                        <InputField label="Alamat" field="owners.address" icon={<MapPin />}
                                             required formData={formData} setFormData={setFormData}
                                         />
                                     </div>
@@ -392,36 +392,36 @@ const DetailPatient = () => {
                                         <h1 className='text-2xl font-bold capitalize'>
                                             {pasien.name}</h1>
                                         <div className='grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 mt-2'>
-                                            <InfoCard icon={<PawPrint />} label="Species" value={pasien.species} />
-                                            <InfoCard icon={<Cake />} label="Birth date" value={pasien.birth_date} />
-                                            <InfoCard icon={<Weight />} label="Weight" value={`${pasien.weight} kg`} />
-                                            <InfoCard icon={<Shield />} label="Gender" value={pasien.gender} />
+                                            <InfoCard icon={<PawPrint />} label="Jenis" value={pasien.species} />
+                                            <InfoCard icon={<Cake />} label="Tanggal lahir" value={pasien.birth_date} />
+                                            <InfoCard icon={<Weight />} label="Berat" value={`${pasien.weight} kg`} />
+                                            <InfoCard icon={<Shield />} label="Jenis Kelamin" value={pasien.gender} />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="information">
-                            <h1 className='text-xl font-bold mb-3'>Owner information</h1>
+                            <h1 className='text-xl font-bold mb-3'>Informasi pemilik</h1>
                             <div className="grid grid-cols-1 gap-4">
                                 <div className="flex items-center space-x-3">
                                     <User className='w-5 h-5 text-gray-500' />
                                     <div>
-                                        <p className="text-sm text-gray-500">Owner name</p>
+                                        <p className="text-sm text-gray-500">Nama pemilik</p>
                                         <p className="font-bold text-gray-900">{pasien?.owners?.name}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <Phone className='w-5 h-5 text-gray-500' />
                                     <div>
-                                        <p className="text-sm text-gray-500">Phone</p>
+                                        <p className="text-sm text-gray-500">Telepon</p>
                                         <p className="font-bold text-gray-900">{pasien?.owners?.phone}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-3">
                                     <MapPin className='w-5 h-5 text-gray-500' />
                                     <div>
-                                        <p className="text-sm text-gray-500">Address</p>
+                                        <p className="text-sm text-gray-500">Alamat</p>
                                         <p className="font-bold text-gray-900">{pasien?.owners?.address}</p>
                                     </div>
                                 </div>
