@@ -305,21 +305,21 @@ const DetailPatient = () => {
                                     Informasi Hewan
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <InputField label="Pet name" field="name" icon={<PawPrint />}
+                                    <InputField label="Nama hewan" field="name" icon={<PawPrint />}
                                         required formData={formData} setFormData={setFormData}
                                     />
-                                    <SelectField label="Species" field="species" options={['Kucing', 'Anjing', 'Ikan'
+                                    <SelectField label="Jenis" field="species" options={['Kucing', 'Anjing', 'Ikan'
                                         , 'Kelinci']} icon={<PawPrint />}
                                         required
                                     />
-                                    <InputField label="Birth date" field="birth_date" icon={<Cake />}
+                                    <InputField label="Tanggal lahir" field="birth_date" icon={<Cake />}
                                         required formData={formData} setFormData={setFormData}
                                     />
                                     <div className="grid grid-cols-2 gap-4">
-                                        <InputField label="Weight (kg)" field="weight" type="number" icon={<Weight />}
+                                        <InputField label="Berat (kg)" field="weight" type="number" icon={<Weight />}
                                             required formData={formData} setFormData={setFormData}
                                         />
-                                        <SelectField label="Gender" field="gender" options={['Jantan', 'Betina']}
+                                        <SelectField label="Jenis Kelamin" field="gender" options={['Jantan', 'Betina']}
                                             icon={<Shield />}
                                             required
                                         />
@@ -334,7 +334,7 @@ const DetailPatient = () => {
                                     Owner Information
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <InputField label="Owner name" field="owners.name" icon={<User />}
+                                    <InputField label="Nama pemilik peliharaan" field="owners.name" icon={<User />}
                                         required formData={formData} setFormData={setFormData}
                                     />
                                     <InputField label="No. Telp" field="owners.phone" icon={<Phone />}

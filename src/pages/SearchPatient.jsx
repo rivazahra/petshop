@@ -38,21 +38,21 @@ const SearchPatient = () => {
 
   return (
     <div className="search-patient">
-      <div className="flex flex-col gap-10">
-        <div className="information space-y-5">
+      <div className="flex flex-col gap-5">
+        <div className="information space-y-2">
           <h1 className="font-bold text-3xl">Cari Pasien</h1>
-          <p className='font-semibold'>Temukan informasi pasien yang sudah terdaftar</p>
+          <p className='font-semibold'>Cari dan akses detail pasien!</p>
         </div>
-        <div className="information space-y-5">
+        <div className="information space-y-4">
           <div className="search-bar">
             <i>
               <IoSearchOutline />
             </i>
-            <input type="text" value={searchValue} name="search" onChange={(e) => setsearchValue(e.target.value)} className="input-search" placeholder="Cari berdasarkan nama hewan, atau nama pemilik" />
+            <input type="text" value={searchValue} name="search" onChange={(e) => setsearchValue(e.target.value)} className="input-search" placeholder="Cari pasien berdasarkan nama hewan atau nama pemilik" />
           </div>
           <div className="space-x-5">
             <select name="" id="jenis-pasien" className="jenis-option" onChange={(e) => setSelectedJenis(e.target.value)}>
-              <option value="all">Semua jenis</option>
+              <option value="all">Semua species</option>
               <option value="kucing">Kucing</option>
               <option value="anjing">Anjing</option>
               <option value="ikan">Ikan</option>
@@ -67,7 +67,6 @@ const SearchPatient = () => {
             <CardSearchPatient pasienData={pasien}/>
           )} */}
         </div>
-        <div className="information"></div>
       </div>
     </div>
   )

@@ -68,12 +68,9 @@ const AddPatient = () => {
     }
   }
 
-  const handleChange = async (e) => {
-   
-    
+  const handleChange = async (e) => {  
     const { name, value, files, type } = e.target
-   
-
+  
     if (type === 'file') {
       const file = files[0]
 
@@ -82,7 +79,6 @@ const AddPatient = () => {
           upsert: true
         }
       )
-
 
         if (error) {
           console.log('Upload gagal', error);
@@ -287,8 +283,8 @@ const AddPatient = () => {
                                 onChange={handleChange} name="ras" placeholder="Contoh: Persia" />
                         </div> */}
                 <div className="form-group">
-                  <label htmlFor="umur">Umur</label>
-                  <input type="date" id='umur' className="form-control" onChange={handleChange}
+                  <label htmlFor="umur">Tanggal lahir</label>
+                  <input type="date" id='umur' className="form-control" onChange={handleChange} max={new Date().toISOString().split('T')[0]}
                     name="birth_date" placeholder="Masukkan umur hewan" value={formData.birth_date} />
                 </div>
                 <div className="form-group">
@@ -301,7 +297,7 @@ const AddPatient = () => {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="berat-badan">Berat badan</label>
+                  <label htmlFor="berat-badan">Berat badan (kg)</label>
                   <input type="text" id='berat-badan' className="form-control" onChange={handleChange}
                     name="weight" placeholder="Contoh: 15" value={formData.weight} />
                 </div>
