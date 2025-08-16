@@ -14,10 +14,10 @@ const CardSearchPatient = ({ pasienData }) => {
               {pasienData.name} 
             </h1>
             <p className="text-sm text-gray-500">
-              Owner: {pasienData.owners.name} | Phone: {pasienData.owners.phone}{' '}
+              Pemilik: {pasienData.owners.name} | Telepon: {pasienData.owners.phone}{' '}
             </p>
             <p className="text-sm text-gray-500">
-              Birth date: {pasienData.birth_date} tahun | Weight: {pasienData.weight} kg
+              Tanggal lahir: {pasienData.birth_date} tahun | Berat: {pasienData.weight} kg
             </p>
           </div>
           </div>
