@@ -1,43 +1,92 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { IoSearchOutline } from 'react-icons/io5'
 import CardMedicalRecords from '../components/CardMedicalRecords'
+import { getMedicalRecords, getPatient, supabase } from '../utils/supabase/client'
 
 const MedicalRecords = () => {
-  const pasien = JSON.parse(localStorage.getItem('dataHewan')) || [{}]
-  const rekamMedis = JSON.parse(localStorage.getItem('rekamMedis'))
-
+  // const pasien = JSON.parse(localStorage.getItem('dataHewan')) || [{}]
+  const [loading, setLoading] = useState(false)
+  const [pasien, setPasien] = useState([])
+  const [namePasien, setNamePasien] = useState('')
+  const [medCod, setMedCod] = useState([])
   const [searchValue, setsearchValue] = useState('')
+
+  useEffect(() => {
+    async function getHewan() {
+      const res = await getPatient()
+      setPasien(res)
+      return res
+    }
+    getHewan()
+  }, [])
+
+
+  useEffect(() => {
+    async function getMedCod() {
+      const res = await getMedicalRecords()
+      setMedCod(res)
+      return res
+    }
+    getMedCod()
+  }, [])
+  // const rekamMedis = JSON.parse(localStorage.getItem('rekamMedis'))
 
 
   const [formData, setFormData] = useState({
-    pasien: '',
+    pet_id: '',
     tglKunjungan: '',
     keluhan: '',
     diagnosis: '',
     penanganan: '',
     obat: '',
     biayaPengobatan: '',
-    kunjunganBerikutnya: '',
     catatan: '',
   })
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
+
+    if (name === 'pasien') {
+      const selectedId = e.target.value
+      const selectedPasien = pasien.find(pas => pas.id.toString() === selectedId.toString())
+     setNamePasien(selectedPasien.name)
+
+      // console.log('Selected ID:', value) // Debug
+      // console.log('Found pasien:', selectedPasien) // Debug
+
+      setFormData((prevData) => ({
+        ...prevData,
+        pet_id: selectedId,
+        name: namePasien
+
+      }))
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value
+      }))
+    }
   }
 
-  const handleSearch = useMemo(() => {
-    let filtered = rekamMedis;
+  // console.log(formData);
 
-    if (searchValue.trim()) {
-      const searchLower = searchValue.toLowerCase().trim()
-      filtered = filtered.filter((patient) => patient.pasien?.toLowerCase().includes(searchLower))
+
+  const handleSearch = useMemo(() => {
+
+    if (!medCod?.length) return []
+
+    let filtered = medCod;
+    const trimmedSearch = searchValue?.trim()
+    if (trimmedSearch) {
+      const searchLower = trimmedSearch.toLowerCase()
+      filtered = filtered.filter((patient) =>
+        patient.pasien?.toLowerCase().includes(searchLower)
+      )
     }
     return filtered
-  }, [rekamMedis, searchValue])
+  }, [medCod, searchValue])
+
+  
 
   const handleReset = () => {
     setFormData({
@@ -48,46 +97,68 @@ const MedicalRecords = () => {
       penanganan: '',
       obat: '',
       biayaPengobatan: '',
-      kunjunganBerikutnya: '',
       catatan: '',
     })
   }
 
 
-  const saveForm = (e) => {
+  const saveForm = async (e) => {
     e.preventDefault()
 
-    const isValid = Object.values(formData).every((value) => value.trim() !== '')
-    const existingData = JSON.parse(localStorage.getItem('rekamMedis')) || []
+    try {
+      const isValid =
+        formData.tglKunjungan &&
+        formData.keluhan &&
+        formData.diagnosis &&
+        formData.penanganan &&
+        formData.obat &&
+        formData.biayaPengobatan &&
+        formData.catatan;
 
-    if (!isValid) {
-      alert('Mohon lengkapi semua field sebelum menyimpan')
-      return
+        console.log(formData);
+        
+      if (!isValid) {
+        alert('Mohon lengkapi semua field sebelum menyimpan')
+        return
+      }
+      setLoading(true)
+      const medicalData = {
+        pet_id: formData.pet_id,
+        name: namePasien,
+        visit_date: formData.tglKunjungan,
+        symptom: formData.keluhan,
+        diagnosis: formData.diagnosis,
+        treatment: formData.penanganan,
+        medicine: formData.obat,
+        cost: formData.biayaPengobatan,
+        notes: formData.catatan
+      }
+      console.log(medicalData);
+      
+      // const existingData = JSON.parse(localStorage.getItem('rekamMedis')) || []
+      const { data: medicalRes, error: medError } = await supabase.from('medical_records').insert(medicalData).select().single()
+      if (medError) throw medError;
+
+      setMedCod(prevMedcod =>[medicalRes,...prevMedcod  ])
+      alert('Rekam medis berhasil disimpan')
+
+      setFormData({
+        pasien: '',
+        tglKunjungan: '',
+        keluhan: '',
+        diagnosis: '',
+        penanganan: '',
+        obat: '',
+        biayaPengobatan: '',
+        kunjunganBerikutnya: '',
+        catatan: '',
+      })
+      setLoading(false)
+
+    } catch (error) {
+      console.log(error)
+
     }
-
-    const newRekamMedis = {
-      ...formData,
-      id: Date.now(),
-    }
-
-    const newData = [...existingData, newRekamMedis]
-    setFormData(newData)
-
-    localStorage.setItem('rekamMedis', JSON.stringify(newData))
-
-    alert('Rekam medis berhasil disimpan')
-    setFormData({
-      pasien: '',
-      tglKunjungan: '',
-      keluhan: '',
-      diagnosis: '',
-      penanganan: '',
-      obat: '',
-      biayaPengobatan: '',
-      kunjunganBerikutnya: '',
-      catatan: '',
-    })
-    console.log('tersimpan', newData)
   }
 
   return (
@@ -103,11 +174,11 @@ const MedicalRecords = () => {
           <div className="grid grid-cols-2 gap-3 items-center">
             <div className="form-group">
               <label htmlFor='pilih-pasien' className="font-bold">Pilih pasien</label>
-              <select className="form-control" id='pilih-pasien' name="pasien" value={formData.pasien} onChange={handleChange}>
+              <select className="form-control" id='pilih-pasien' name="pasien" value={formData.pet_id || ''} onChange={handleChange}>
                 <option value="">Pilih pasien..</option>
                 {pasien.map((pas) => (
-                  <option key={pas.id} value={pas.pasien}>
-                    {pas.name} - {pas.namaPemilik}
+                  <option className='capitalize' key={pas.id} value={pas.id}>
+                    {pas.name}
                   </option>
                 ))}
               </select>
@@ -115,7 +186,7 @@ const MedicalRecords = () => {
 
             <div className="form-group">
               <label htmlFor='tgl-kunjungan'>Tanggal Kunjungan</label>
-              <input type="date" id='tgl-kunjungan' name="tglKunjungan" onChange={handleChange} value={formData.tglKunjungan} className="form-control" />
+              <input type="date" id='tgl-kunjungan' max={new Date().toISOString().split('T')[0]} name="tglKunjungan" onChange={handleChange} value={formData.tglKunjungan} className="form-control" />
             </div>
           </div>
           <div className="grid grid-cols-1 gap-3 mt-3">
@@ -140,24 +211,23 @@ const MedicalRecords = () => {
               <label htmlFor='obat-pasien'>Obat yang diberikan</label>
               <textarea className="h-20 form-control" id='obat-pasien' name="obat" value={formData.obat} placeholder="Masukkan obat beserta dosis" onChange={handleChange}></textarea>
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor='nextKunjungan'>Kunjungan Berikutnya (jika ada)</label>
               <input type="date" id='nextKunjungan' name="kunjunganBerikutnya" value={formData.kunjunganBerikutnya} className="form-control" onChange={handleChange} />
-            </div>
+            </div> */}
 
-            <div className="form-group mb-2">
+            <div className="form-group ">
               <label htmlFor='biaya-pengobatan'>Biaya Pengobatan</label>
               <input type="number" id='biaya-pengobatan' name="biayaPengobatan" value={formData.biayaPengobatan} className="h-10 form-control" placeholder="Masukkan biaya dalam rupiah, contoh: 35,000" onChange={handleChange} />
             </div>
           </div>
-          <div className="grid grid-cols-1 mb-2 ">
-            <div className="form-group">
-              <label htmlFor="catatanTambahan">Catatan tambahan</label>
-              <textarea name="catatan" value={formData.catatan} id="catatanTambahan" className="form-control" placeholder="Catatan khusus dari dokter hewan (opsional)" onChange={handleChange}></textarea>
-            </div>
+          <div className="form-group my-5">
+            <label htmlFor="catatanTambahan">Catatan tambahan</label>
+            <textarea name="catatan" value={formData.catatan} id="catatanTambahan" className="form-control" placeholder="Catatan khusus dari dokter hewan (opsional)" onChange={handleChange}></textarea>
           </div>
-          <button className="button-save" type="submit">
-            Simpan
+          <button className="button-save" type="submit"
+          >   {loading ? 'Menyimpan....' : 'Simpan'}
+
           </button>
           <button className="btn-reset" type='button' onClick={handleReset}>Reset</button>
         </form>
@@ -173,7 +243,7 @@ const MedicalRecords = () => {
           </i>
           <input type="text" value={searchValue} name="search" onChange={(e) => setsearchValue(e.target.value)} className="input-search" placeholder="Cari berdasarkan nama hewan.." />
         </div>
-        {rekamMedis?.length == 0 || rekamMedis == null ? (
+        {medCod?.length == 0 || medCod == null ? (
 
           <p className='mt-4 font-semibold'>
             Belum ada rekam medis yang tersimpan

@@ -11,14 +11,32 @@ export const getPatient = async () => {
       owners (
         name,
         email,
-        phone
+        phone,
+        address
       )
     `)
   if (error) {
     console.log('Error fetching pets:', error)
     return null
   }
-  console.log('data',data);
-  
   return data
 }
+
+export const getMedicalRecords = async ()=>{
+  const {data,error} = await supabase.from('medical_records').select(`*,
+    pets(
+    id,
+    name,
+    species,
+    birth_date,
+    weight,
+    gender,
+    photo_url)`)
+    
+    if(error){
+      console.log("Error fetching medical records:", error);
+      return null
+    }
+    return data
+}
+
