@@ -80,7 +80,7 @@ const MedicalRecords = () => {
     if (trimmedSearch) {
       const searchLower = trimmedSearch.toLowerCase()
       filtered = filtered.filter((patient) =>
-        patient.pasien?.toLowerCase().includes(searchLower)
+        patient.name?.toLowerCase().includes(searchLower)
       )
     }
     return filtered
