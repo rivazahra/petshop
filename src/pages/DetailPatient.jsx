@@ -6,9 +6,6 @@ import { Cake, Camera, Edit, Mail, MapPin, PawPrint, Phone, Save, Shield, User, 
 import { InputField } from '../components/InputField'
 import _ from 'lodash'
 
-
-
-
 const DetailPatient = () => {
 
     const [pasien, setPasien] = useState(null)
@@ -40,15 +37,13 @@ const DetailPatient = () => {
 
     const [photoPreview, setPhotoPreview] = useState(pasien?.photo_url || null)
    
-    
-
-
-
-
     const handleEdit = () => {
         setFormData({ ...pasien })
         setShowModal(true)
     }
+
+    // console.log(formData);
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (!formData.name || !formData.species || !formData.gender || !formData.owners?.name || !formData.owners?.phone ||
@@ -247,8 +242,8 @@ const DetailPatient = () => {
                     <div
                         className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-pink-50 to-pink-100">
                         <div>
-                            <h2 className="text-2xl font-bold text-gray-900">Edit Data Patient</h2>
-                            <p className="text-gray-600 text-sm mt-1">Update pet information</p>
+                            <h2 className="text-2xl font-bold text-gray-900">Edit Data Pasien</h2>
+                            <p className="text-gray-600 text-sm mt-1">Perbarui informasti hewan</p>
                         </div>
                         <button onClick={() => setShowModal(false)}
                             className="p-2 hover:bg-white hover:bg-opacity-60 rounded-lg 
@@ -295,7 +290,7 @@ const DetailPatient = () => {
                                     <button type='button' onClick={() => {
                                         setPhotoPreview(null)
                                         setSelectedFile(null)
-                                    }} className='text-xs text-red-500 hover:text-red-700 mt-2 cursor-pointer'>Delete photo</button>
+                                    }} className='text-xs text-red-500 hover:text-red-700 mt-2 cursor-pointer'>Hapus photo</button>
                                 )}
                             </div>
                             {/* pet information */}
@@ -384,7 +379,7 @@ const DetailPatient = () => {
                                         <button className='cursor-pointer mt-3  text-pink-600 hover:text-pink-700 flex  items-center' onClick={() => setShowModal(true)}>
                                             <Camera className='w-4 h-4 mr-1' />
                                             <span>
-                                                Change photo
+                                                Ubah photo
                                             </span>
                                         </button>
                                     </div>

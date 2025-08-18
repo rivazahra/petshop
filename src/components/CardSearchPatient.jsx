@@ -17,7 +17,7 @@ const CardSearchPatient = ({ pasienData }) => {
               Pemilik: {pasienData.owners.name} | Telepon: {pasienData.owners.phone}{' '}
             </p>
             <p className="text-sm text-gray-500">
-              Tanggal lahir: {pasienData.birth_date} tahun | Berat: {pasienData.weight} kg
+              Tanggal lahir: {pasienData.birth_date}  | Berat: {pasienData.weight} kg
             </p>
           </div>
           </div>

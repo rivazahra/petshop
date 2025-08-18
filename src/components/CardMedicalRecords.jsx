@@ -5,7 +5,7 @@ return (
 <div className="form-group mt-10">
     <div className="bg-gray-100 p-4 rounded-md">
         <p>
-            <strong>{rekam.name}</strong>
+            <strong className='capitalize'>{rekam.name}</strong>
         </p>
         <p>
             <strong>Tanggal:</strong> {rekam.visit_date} <span className="mx-1">|</span>
