@@ -73,24 +73,7 @@ const AddPatient = () => {
   
     if (type === 'file') {
       const file = files[0]
-
-      if (file) {
-        const { data, error } = await supabase.storage.from('foto-hewan').upload(`pets/${file.name}`, file, {
-          upsert: true
-        }
-      )
-
-        if (error) {
-          console.log('Upload gagal', error);
-          return;
-        }
-        const url = supabase.storage.from('foto-hewan').getPublicUrl(`pets/${file.name}`).data.publicUrl;
-
-        setFormData((prevData) => ({
-          ...prevData,
-          photo_url: url
-        }))
-      }
+      setSelectedFile(file)
       handleFileSelect(file)
     } else {
       setFormData((prevData) => ({
@@ -110,68 +93,85 @@ const AddPatient = () => {
 
   const handleUpload = async (e) => {
     e.preventDefault()
-    if (!formData.name || !formData.species || !formData.birth_date || !formData.gender || !formData.weight) {
+    if (!formData.name || !formData.species || !formData.birth_date || !formData.gender || !formData.weight || !selectedFile || !ownerData.name || !ownerData.address || !ownerData.email || !ownerData.phone) {
       alert('Mohon lengkapi semua informasi')
       return;
     }
-    if (!selectedFile) {
-      alert('Mohon upload foto hewan terlebih dahulu!')
-      return
+    try {
+      let photoUrl = formData.photo_url
+      if (selectedFile) {
+        const { data, error } = await supabase.storage.from('foto-hewan').upload(`pets/${selectedFile.name}`, selectedFile, {
+          upsert: true
+        })
+
+        if (error) {
+          console.log('Upload gagal', error);
+          return
+        }
+
+        photoUrl = supabase.storage.from('foto-hewan').getPublicUrl(`pets/${selectedFile.name}`).data.publicUrl;
+      }
+
+
+
+      setIsUploaded(true)
+      const owner = {
+        name: ownerData.name,
+        phone: ownerData.phone,
+        address: ownerData.address,
+        email: ownerData.email
+      }
+
+
+      const { data: ownerRes, error: ownerError } = await supabase.from('owners').insert(owner).select().single()
+
+      if (ownerError) {
+        console.error('Gagal insert owner data', ownerError)
+        return;
+      }
+      const ownerId = ownerRes.id
+
+      const pet = {
+        name: formData.name,
+        species: formData.species,
+        birth_date: formData.birth_date,
+        weight: formData.weight,
+        photo_url: photoUrl,
+        gender: formData.gender,
+        owner_id: ownerId
+      }
+      const { data: petRes, error: petError } = await supabase.from('pets').insert(pet)
+
+      if (petError) {
+        console.error("Gagal insert pet:", petError);
+        return;
+      }
+
+      alert("Berhasil simpan pasien!");
+
+      setSelectedFile(null)
+      setFormData({
+        photo_url: null,
+        name: '',
+        species: '',
+        birth_date: '',
+        weight: '',
+        gender: '',
+      });
+
+      setOwnerData({
+        name: '',
+        email: '',
+        phone: '',
+        address: ''
+      })
+
+    } catch (error) {
+      console.error('Error:', error)
+      alert('Terjadi kesalahan saat menyimpan data')
+    } finally {
+      setIsUploaded(false)
     }
-
-    const owner = {
-      name: ownerData.name,
-      phone: ownerData.phone,
-      address: ownerData.address,
-      email: ownerData.email
-    }
-
-
-    const { data: ownerRes, error: ownerError } = await supabase.from('owners').insert(owner).select().single()
-
-    if (ownerError) {
-      console.error('Gagal insert owner data', ownerError)
-      return;
-    }
-    const ownerId = ownerRes.id
-
-    const pet = {
-      name: formData.name,
-      species: formData.species,
-      birth_date: formData.birth_date,
-      weight: formData.weight,
-      photo_url: formData.photo_url,
-      gender: formData.gender,
-      owner_id: ownerId
-    }
-    const { data: petRes, error: petError } = await supabase.from('pets').insert(pet)
-
-    if (petError) {
-      console.error("Gagal insert pet:", petError);
-      return;
-    }
-
-    alert("Berhasil simpan pasien!");
-
-    
-
-    setFormData({
-      photo_url:null,
-      name: '',
-      species: '',
-      birth_date: '',
-      weight: '',
-      gender: '',
-    });
-
-    setOwnerData({
-      name: '',
-      email: '',
-      phone: '',
-      address: ''
-    })
-
-
   }
 
   // const saveForm = (e) => {
@@ -330,8 +330,11 @@ const AddPatient = () => {
                   onChange={handleOwnerChange} placeholder="Masukkan nomor telepon" value={ownerData.phone} />
               </div>
             </div>
-            <button className='button-save' type='submit'>Simpan pasien</button>
-            <button className="ml-4 btn-reset">Reset form</button>
+            <div className=' md:flex-row flex  items-center '>
+
+            <button className='button-save' type='submit'>{isUploaded ? 'Menyimpan....' : 'Simpan'}</button>
+            <button className="btn-reset">Reset</button>
+            </div>
           </div>
         </div>
       </div>
