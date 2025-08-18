@@ -21,7 +21,7 @@ const Layout = () => {
         <Sidebar collapsed={collapsed} setCollapse={setIsCollapsed} onTogle={
           handleClick
         } />
-        <main className={`flex-1 main-content transition-all duration-300 min-h-screen  overflow-y-auto $${!collapsed ? 'max-sm:opacity-0 max-sm:pointer-events-none' : ''}`}>
+        <main className={`flex-1 main-content transition-all opacity-100 duration-300 min-h-screen  overflow-y-auto ${!collapsed ? 'max-sm:ml-7 max-sm:pointer-events-none' : ''}`}>
           <Outlet />
         </main>
       </div>

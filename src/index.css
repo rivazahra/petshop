@@ -22,6 +22,7 @@
   .main-content {
     flex: 1;
   }
+
 }
 
 /* desktop */
@@ -46,6 +47,9 @@
 }
 
 @media (max-width: 767px) {
+    .information h1{
+    font-size: 20px;
+  }
  
 }
 
@@ -125,13 +129,13 @@ nav  .active {
   margin-right: 20px;
   border-radius: 0.5rem;
   color: white;
-  background-color: #3a87fb;
+  background-color: #f6339a;
 }
 .button-save:hover{
-  background-color: #1a5dc1;
+  background-color: #e60076;
 }
 .information .button-reset {
-  padding: 10px;
+  padding-right: 10px;
   cursor: pointer;
   font-weight: 600;
   margin-right: 20px;

@@ -59,21 +59,21 @@ export default function Sidebar({ collapsed, onTogle}) {
                 <Heart className="w-8 h-8 text-pink-500 " />
               </div>
               {!collapsed && (
-                  <h1 className=" font-bold text-gray-800 text-2xl">PetCare</h1>
+                  <h1 className=" font-bold text-gray-800 text-xl md:text-2xl">PetCare</h1>
             
               )}
             </div>
           </div>
           {/* Navigation Menu */}
-          <nav className={`mt-5 flex flex-col text-xl  font-medium  transition-opacity duration-300 
+          <nav className={`mt-5 flex flex-col   font-medium  transition-opacity duration-300 
       `}>
             <ul className="space-y-1">
               {menuItems.map((item, index) => {
                 const IconComponent = item.icon;
                 return (
-                  <NavLink key={index} to={item.path}  className={({ isActive }) => `flex items-center text-center py-4 my-9   rounded-lg transition-all duration-200 whitespace-nowrap group
+                  <NavLink key={index} to={item.path}  className={({ isActive }) => `${collapsed ? 'w-10' : ''} flex items-center text-center py-2 md:py-4 my-9 rounded-lg transition-all duration-200 whitespace-nowrap group
                 ${isActive
-                      ? '  bg-pink-50  text-pink-600  '
+                      ? '  bg-pink-50  text-pink-600 '
                       : 'text-gray-600  hover:translate-x-2 hover:bg-gray-100 hover:text-pink-600 transition-transform'
                     }
                       ${collapsed ? 'p-0':''}
@@ -82,7 +82,7 @@ export default function Sidebar({ collapsed, onTogle}) {
                 >
                     <a
                       href="#"
-                      className={`p-2 flex items-center rounded-lg   `}
+                      className={`p-2 flex items-center rounded-lg text-[10px] md:text-xl  `}
                     >
                       <IconComponent className={`w-5 h-5  ${collapsed ? ' opacity-100' : ''}`} />
                       {!collapsed && (

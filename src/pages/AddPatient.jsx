@@ -28,12 +28,6 @@ const AddPatient = () => {
   const fileInputRef = useRef(null)
 
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) handleFileSelect(file)
-
-  }
-
   const handleDrop = (e) => {
     e.preventDefault()
     setIsDragging(false)
@@ -174,53 +168,15 @@ const AddPatient = () => {
     }
   }
 
-  // const saveForm = (e) => {
-  // e.preventDefault();
-
-  // // 1. Ambil data yang sudah ada (kalau ada)
-  // const existingData = JSON.parse(localStorage.getItem('dataHewan')) || [];
-
-
-  // const newPasien = {
-  // ...formData,
-  // id: Date.now()
-  // }
-  // // 2. Tambahkan data baru ke array
-  // const newData = [...existingData, newPasien];
-
-  // // 3. Simpan ulang ke localStorage
-  // localStorage.setItem('dataHewan', JSON.stringify(newData));
-
-  // // 4. Reset form
-  // setFormData({
-  // photo:"",
-  // name: '',
-  // jenis: '',
-  // ras: '',
-  // birth_date: '',
-  // weight: '',
-  // gender: '',
-  // });
-
-  // setOwnerData({
-  // namaPemilik: '',
-  // noTelp: '',
-  // alamat: ''
-  // })
-
-  // console.log('Tersimpan:', newData);
-  // };
-
-
   return (
     <form id='add-patient' action="" onSubmit={handleUpload}>
       <div className="add-patient">
         <div className="flex  flex-col gap-10">
-          <div className="information space-y-5">
+          <div className={`information space-y-5`}>
             <h1 className=" font-bold text-3xl">Tambah Pasien Baru</h1>
             <p>Daftarkan pasien baru ke dalam pasien</p>
           </div>
-          <div className="information space-y-5 ">
+          <div className="information space-y-5">
             <h1 className="font-bold text-2xl">Informasi Pasien</h1>
             <div className="">
               <div className="flex  flex-col items-start gap-2 mb-6">
@@ -258,11 +214,11 @@ const AddPatient = () => {
                   onChange={handleChange} />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div className="form-group">
                   <label htmlFor="nama-hewan">Nama Hewan</label>
                   <input type="text" id='nama-hewan' name="name" value={formData.name}
-                    onChange={handleChange} className="form-control" placeholder="Masukkan nama hewan" />
+                    onChange={handleChange} className="form-control" placeholder="Bobby" />
                 </div>
                 <div>
                   <div className="form-group">
@@ -277,11 +233,6 @@ const AddPatient = () => {
                     </select>
                   </div>
                 </div>
-                {/* <div className="form-group">
-                            <label htmlFor="ras">Ras</label>
-                            <input type="text" id='ras' className="form-control" value={formData.ras}
-                                onChange={handleChange} name="ras" placeholder="Contoh: Persia" />
-                        </div> */}
                 <div className="form-group">
                   <label htmlFor="umur">Tanggal lahir</label>
                   <input type="date" id='umur' className="form-control" onChange={handleChange} max={new Date().toISOString().split('T')[0]}
@@ -307,7 +258,7 @@ const AddPatient = () => {
           </div>
           <div className="information space-y-5">
             <h1 className="font-bold text-2xl">Informasi pemilik</h1>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="form-group">
                 <label htmlFor="namaPemilik">Nama Pemilik</label>
                 <input type="text" id='namaPemilik' className="form-control" name="name"
@@ -316,7 +267,7 @@ const AddPatient = () => {
               <div className="form-group">
                 <label htmlFor="email">Masukkan email</label>
                 <input type="email" id='email' className="form-control" name="email"
-                  onChange={handleOwnerChange} placeholder="Masukkan nomor email" value={ownerData.email} />
+                  onChange={handleOwnerChange} placeholder="Masukkan email" value={ownerData.email} />
               </div>
               <div className="form-group ">
                 <label htmlFor="address">Alamat</label>
@@ -327,7 +278,7 @@ const AddPatient = () => {
               <div className="form-group">
                 <label htmlFor="phone">Nomor telepon</label>
                 <input type="text" id='phone' className="form-control" name="phone"
-                  onChange={handleOwnerChange} placeholder="Masukkan nomor telepon" value={ownerData.phone} />
+                  onChange={handleOwnerChange} placeholder="Masukkan nomor telp" value={ownerData.phone} />
               </div>
             </div>
             <div className=' md:flex-row flex  items-center '>

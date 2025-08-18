@@ -5,6 +5,7 @@ import { getPatient } from '../utils/supabase/client'
 
 const SearchPatient = () => {
   const [pasien, setPasien] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const [searchValue, setsearchValue] = useState('')
   const [selectedJenis, setSelectedJenis] = useState('all')
@@ -24,9 +25,11 @@ const SearchPatient = () => {
   }, [pasien, selectedJenis, searchValue])
   
   useEffect(()=> {
+    setLoading(true)
     async function getHewan(){
       const res = await getPatient()
       setPasien(res)
+      setLoading(false)
       return res
     } 
     getHewan()   
@@ -46,9 +49,9 @@ const SearchPatient = () => {
             <i>
               <IoSearchOutline />
             </i>
-            <input type="text" value={searchValue} name="search" onChange={(e) => setsearchValue(e.target.value)} className="input-search" placeholder="Cari pasien berdasarkan nama hewan atau nama pemilik" />
+            <input type="text" value={searchValue} name="search" onChange={(e) => setsearchValue(e.target.value)} className="input-search" placeholder="Cari nama hewan" />
           </div>
-          <div className="space-x-5">
+          <div className="space-x-5 pb-5">
             <select name="" id="jenis-pasien" className="jenis-option" onChange={(e) => setSelectedJenis(e.target.value)}>
               <option value="all">Semua species</option>
               <option value="kucing">Kucing</option>
@@ -57,13 +60,10 @@ const SearchPatient = () => {
               <option value="kelinci">Kelinci</option>
             </select>
           </div>
+          {loading && 'Loading....'}
           {filteredPatients.map((pasien) => (
             <CardSearchPatient key={pasien.id} pasienData={pasien} />
           ))}
-          {/* {filteredPatients && (
-            
-            <CardSearchPatient pasienData={pasien}/>
-          )} */}
         </div>
       </div>
     </div>
