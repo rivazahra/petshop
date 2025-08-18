@@ -49,34 +49,34 @@ const DashboardPage = () => {
   return (
     <div className=" flex flex-col gap-10 ">
       <div className=" information p-5 space-y-4   shadow-lg rounded-md ">
-        <h1 className='font-bold text-3xl'>Welcome back, Admin!</h1>
-        <p>Here's what's happening at your clinic today</p>
+        <h1 className='font-bold  sm:text-3xl'>Halo, Admin!</h1>
+        <p>Berikut aktivitas klinikmu hari ini!</p>
       </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ">
             <StatCard
               icon={<Users className="w-6 h-6 text-white" />}
-              title="Total Pets"
+              title="Total Hewan"
               value="1,247"
               change={12}
               color="bg-blue-500"
             />
             <StatCard
               icon={<Calendar className="w-6 h-6 text-white" />}
-              title="Appointments Today"
+              title="Kunjugan hari ini"
               value="28"
               change={8}
               color="bg-green-500"
             />
             <StatCard
               icon={<Heart className="w-6 h-6 text-white" />}
-              title="Health Checkups"
+              title="Pemeriksaan kesehatan"
               value="156"
               change={-3}
               color="bg-pink-500"
             />
             <StatCard
               icon={<AlertCircle className="w-6 h-6 text-white" />}
-              title="Pending Tasks"
+              title="Pekerjaan tertunda"
               value="9"
               change={-15}
               color="bg-orange-500"
@@ -86,7 +86,7 @@ const DashboardPage = () => {
            <div className="grid grid-cols-1  gap-8 mb-8">
             {/* Pet Health Trends */}
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Pet Health Trends</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Trend Kesehatan Hewan</h3>
               <ResponsiveContainer width="100%" height={285}>
                 <LineChart data={petHealthData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
@@ -107,13 +107,13 @@ const DashboardPage = () => {
               </ResponsiveContainer>
             </div>
              <div className="mt-8 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activities</h3>
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Aktivitas terbaru</h3>
             <div className="space-y-4">
               {[
-                { icon: CheckCircle, text: "Luna (Golden Retriever) completed vaccination", time: "2 hours ago", color: "text-green-600" },
-                { icon: Calendar, text: "New appointment scheduled for Max (Persian Cat)", time: "4 hours ago", color: "text-blue-600" },
-                { icon: AlertCircle, text: "Bella (Labrador) needs follow-up checkup", time: "6 hours ago", color: "text-orange-600" },
-                { icon: Heart, text: "Charlie (Bulldog) health record updated", time: "1 day ago", color: "text-pink-600" }
+                { icon: CheckCircle, text: "Luna (Golden Retriever) selesai vaksinasi", time: "2 jam yang lalu", color: "text-green-600" },
+                { icon: Calendar, text: "Jadwal janji temu untuk Max (Kucing Persia)", time: "4 jam yang lalu", color: "text-blue-600" },
+                { icon: AlertCircle, text: "Bella (Labrador) perlu pemeriksaan lanjutan", time: "6 jam yang lalu", color: "text-orange-600" },
+                { icon: Heart, text: "Charlie (Bulldog) rekam medis diperbarui", time: "1 hari yang lalu", color: "text-pink-600" }
               ].map((activity, index) => (
                 <div key={index} className="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
                   <activity.icon className={`w-5 h-5 mr-3 ${activity.color}`} />

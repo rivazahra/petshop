@@ -164,14 +164,14 @@ const MedicalRecords = () => {
   return (
     <div className="medical-records flex flex-col gap-10 text-md max-md:text-sm ">
       <div className="information space-y-2">
-        <h1 className="text-3xl font-bold capitalize">Rekam Medis</h1>
+        <h1 className="sm:text-2xl text-xl font-bold capitalize">Rekam Medis</h1>
         <p className="">Tambah dan kelola rekam medis pasien</p>
       </div>
       <div className="information space-y-5">
         <h1 className="text-2xl font-semibold mb-5">Tambah rekam medis baru</h1>
 
         <form action="med-records" onSubmit={saveForm}>
-          <div className="grid grid-cols-2 gap-3 items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
             <div className="form-group">
               <label htmlFor='pilih-pasien' className="font-bold">Pilih pasien</label>
               <select className="form-control" id='pilih-pasien' name="pasien" value={formData.pet_id || ''} onChange={handleChange}>
@@ -192,11 +192,11 @@ const MedicalRecords = () => {
           <div className="grid grid-cols-1 gap-3 mt-3">
             <div className="form-group">
               <label htmlFor='keluhan-gejala'>Keluhan/Gejala</label>
-              <textarea className="h-20 form-control" id='keluhan-gejala' onChange={handleChange} name="keluhan" value={formData.keluhan} placeholder="Masukkan keluhan atau gejala yang dialami hewan"></textarea>
+              <textarea className="h-20 form-control" id='keluhan-gejala' onChange={handleChange} name="keluhan" value={formData.keluhan} placeholder="Keluhan atau gejala yang dialami hewan"></textarea>
             </div>
             <div className="form-group">
               <label htmlFor='diagnosis'>Diagnosis</label>
-              <textarea id='diagnosis' className="h-20 form-control" name="diagnosis" value={formData.diagnosis} placeholder="Masukkan diagnosis dari dokter hewan" onChange={handleChange}></textarea>
+              <textarea id='diagnosis' className="h-20 form-control" name="diagnosis" value={formData.diagnosis} placeholder="Diagnosis dari dokter hewan" onChange={handleChange}></textarea>
             </div>
           </div>
 
@@ -204,12 +204,12 @@ const MedicalRecords = () => {
           <div className="grid grid-cols-2 max-md:grid-cols-1  gap-3 mt-3 ">
             <div className="form-group">
               <label className='' htmlFor='penanganan'>Penanganan/Pengobatan</label>
-              <textarea id='penanganan' className="h-20 form-control txt-area" name="penanganan" value={formData.penanganan} placeholder="Masukkan detail penanganan atau pengobatan" onChange={handleChange}></textarea>
+              <textarea id='penanganan' className="h-20 form-control txt-area" name="penanganan" value={formData.penanganan} placeholder="Detail penanganan atau pengobatan" onChange={handleChange}></textarea>
             </div>
 
             <div className="form-group">
               <label htmlFor='obat-pasien'>Obat yang diberikan</label>
-              <textarea className="h-20 form-control" id='obat-pasien' name="obat" value={formData.obat} placeholder="Masukkan obat beserta dosis" onChange={handleChange}></textarea>
+              <textarea className="h-20 form-control" id='obat-pasien' name="obat" value={formData.obat} placeholder="Obat yang diberikan" onChange={handleChange}></textarea>
             </div>
             {/* <div className="form-group">
               <label htmlFor='nextKunjungan'>Kunjungan Berikutnya (jika ada)</label>
@@ -218,12 +218,12 @@ const MedicalRecords = () => {
 
             <div className="form-group ">
               <label htmlFor='biaya-pengobatan'>Biaya Pengobatan</label>
-              <input type="number" id='biaya-pengobatan' name="biayaPengobatan" value={formData.biayaPengobatan} className="h-10 form-control" placeholder="Masukkan biaya dalam rupiah, contoh: 35,000" onChange={handleChange} />
+              <input type="number" id='biaya-pengobatan' name="biayaPengobatan" value={formData.biayaPengobatan} className="h-10 form-control" placeholder="Biaya pengobatan" onChange={handleChange} />
             </div>
           </div>
           <div className="form-group my-5">
             <label htmlFor="catatanTambahan">Catatan tambahan</label>
-            <textarea name="catatan" value={formData.catatan} id="catatanTambahan" className="form-control" placeholder="Catatan khusus dari dokter hewan (opsional)" onChange={handleChange}></textarea>
+            <textarea name="catatan" value={formData.catatan} id="catatanTambahan" className="form-control" placeholder="Catatan tambahan (opsional)" onChange={handleChange}></textarea>
           </div>
           <button className="button-save" type="submit"
           >   {loading ? 'Menyimpan....' : 'Simpan'}
