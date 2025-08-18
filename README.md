@@ -1,31 +1,27 @@
-# 🐾 Petshop Management System
+# Petshop Management System
 
 A comprehensive web application for managing pet store operations built with modern web technologies.
 
-## 🚀 Demo Access
+## Demo Access
 
-HEAD
-**Live Demo:** [https://petshop-kappa-khaki.vercel.app](https://petshop-kappa-khaki.vercel.app)
-===============================================================================================
+HEAD Live Demo: [https://petshop-kappa-khaki.vercel.app ](https://petshop-kappa-khaki.vercel.app)
+=================================================================================================
 
-**Live Demo:** [https://petshop-kappa-khaki.vercel.app]([https://your-domain.com](https://petshop-kappa-khaki.vercel.app))
-
-## ✨ Features
+### Features
 
 - 🐕 **Pet Management** - Complete pet records and health tracking
 - 📊 **Analytics Dashboard** - Business insights and reporting
-- 📱 **Responsive Design** - Works on all devices
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend:** React.js, Tailwind CSS, React Router
 - **State Management:** Context API
 
 ## 📱 Screenshots
 
-![1753678749412](images/README/1753678749412.png)
+![1754448588862](images/README/1754448588862.png)
 
-## 🔧 Installation
+## Installation
 
 ```bash
 # Clone repository
