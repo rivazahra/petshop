@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 const CardSearchPatient = ({ pasienData }) => {
 
   return (
-    <div className=" text-sm ">
-        <div className="information-search max-md:flex-col max-md:items-start space-y-3 flex items-center justify-between " >
+    <div className=" text-sm md:text-md  ">
+        <div className="information-search p-4 md:p-5 max-md:flex-col max-md:items-start space-y-3 flex items-center justify-between " >
           <div className="flex gap-4">
 
             <img src={pasienData.photo_url} className='rounded-full w-20 h-20' alt="" />

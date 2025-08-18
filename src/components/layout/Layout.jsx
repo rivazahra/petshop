@@ -8,14 +8,20 @@ const Layout = () => {
   const handleClick  = ()=>{
     setIsCollapsed(!collapsed)
   }
+  const handleNavClick = () => {
+  // Auto collapse di mobile saat klik nav item
+  if (window.innerWidth < 650) {
+    setIsCollapsed(!collapsed)
+  }
+}
   return (
     <ProtectedRoute>
 
-      <div className="flex bg-[#F5F7FA] ">
-        <Sidebar collapsed={collapsed} setCollapse={setIsCollapsed} onToogle={
+      <div className="flex h-screen bg-[#F5F7FA]">
+        <Sidebar collapsed={collapsed} setCollapse={setIsCollapsed} onTogle={
           handleClick
         } />
-        <main className={`flex-1 ml-12 transition-all duration-300 min-h-screen ${collapsed ? 'md:ml-12' : 'md:ml-72'}   overflow-y-auto`}>
+        <main className={`flex-1 main-content transition-all duration-300 min-h-screen  overflow-y-auto $${!collapsed ? 'max-sm:opacity-0 max-sm:pointer-events-none' : ''}`}>
           <Outlet />
         </main>
       </div>

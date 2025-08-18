@@ -26,8 +26,6 @@ const SearchPatient = () => {
   useEffect(()=> {
     async function getHewan(){
       const res = await getPatient()
-      console.log(res);
-      
       setPasien(res)
       return res
     } 

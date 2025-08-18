@@ -213,7 +213,7 @@ const DetailPatient = () => {
     }
     return (
         <div className="flex flex-col gap-10">
-            <div className='information flex justify-between'>
+            <div className='information md:flex-row flex flex-col justify-between'>
                 <div className='space-y-2'>
                     <h1 className='font-bold text-3xl '>
                         Detail Pasien
@@ -373,14 +373,11 @@ const DetailPatient = () => {
                     <>
                         <div className='information'>
                             <div className='flex flex-col'>
-                                <div className='flex gap-8 cursor-pointer'>
+                                <div className=' md:flex-row flex flex-col gap-8 cursor-pointer'>
                                     <div  >
                                         <img src={pasien.photo_url} className='w-40 h-40 object-cover  rounded-xl' alt="" />
                                         <button className='cursor-pointer mt-3  text-pink-600 hover:text-pink-700 flex  items-center' onClick={() => setShowModal(true)}>
-                                            <Camera className='w-4 h-4 mr-1' />
-                                            <span>
-                                                Ubah photo
-                                            </span>
+                                           
                                         </button>
                                     </div>
                                     <div className='flex-1'>
